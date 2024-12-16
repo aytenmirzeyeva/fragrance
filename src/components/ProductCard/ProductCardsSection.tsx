@@ -34,6 +34,7 @@ const ProductCardsSection: React.FC = () => {
       }
     };
     fetchPerfumes();
+    console.log(perfumes);
   }, []);
 
   if (loading) {

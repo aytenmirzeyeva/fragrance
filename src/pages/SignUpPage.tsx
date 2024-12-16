@@ -40,11 +40,19 @@ const SignUpPage = () => {
                 </label>
               </div>
             </div>
-            <Button btnText="SIGN UP" className="p-2"/>
+            <Button btnText="SIGN UP" className="p-2" />
             <div className="text-white my-2">OR</div>
             <div>
-              <Button btnText="Continue with Google" icon={faGoogle} className="p-2"/>
-              <Button btnText="Continue with Facebook" icon={faApple} className="p-2"/>
+              <Button
+                btnText="Continue with Google"
+                icon={faGoogle}
+                className="p-2"
+              />
+              <Button
+                btnText="Continue with Facebook"
+                icon={faApple}
+                className="p-2"
+              />
             </div>
             <p className="text-gray-500">
               Already have an account?

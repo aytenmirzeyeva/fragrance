@@ -5,6 +5,8 @@ import GenderFilter from "./GenderFilter";
 import BrandsFilter from "./BrandsFilter";
 import NotesFilter from "./NotesFilter";
 import RatingFilter from "./RatingFilter";
+import Input from "./Input";
+import SelectInput from "./SelectInput";
 
 interface FiltersProps {
   className?: string;
@@ -27,6 +29,11 @@ const Filters: React.FC<FiltersProps> = ({ className, setShowFilters }) => {
       <hr className="my-6" />
       <div className="year-filter-section">
         <StyledHeading headingText="Release year" className="text-lg" />
+        <div className="flex items-center justify-around">
+          <SelectInput />
+          <span className="text-pink-300 font-medium">—</span>
+          <SelectInput />
+        </div>
       </div>
       <hr className="my-6" />
       <GenderFilter />
