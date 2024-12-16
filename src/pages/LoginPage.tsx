@@ -1,10 +1,53 @@
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import {
+  GoogleOAuthProvider,
+  GoogleLogin,
+  GoogleCredentialResponse,
+} from "@react-oauth/google";
+import { BASE_URL } from "@/services/baseURL";
+
 import Input from "@/components/Input";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
-import { faGoogle, faApple } from "@fortawesome/free-brands-svg-icons";
+import { faApple } from "@fortawesome/free-brands-svg-icons";
 import StyledHeading from "@/components/Heading";
 import Button from "@/components/Button";
+import { GoogleLoginRequest } from "@/types/google-login.request";
+import { GoogleJWTResponse } from "@/types/google.jwt.response";
+import { GeneralResponse } from "@/types/general-response";
+import { LoginResponse } from "@/types/login-response";
 const LoginPage = () => {
+  const handleSuccess = (response: GoogleCredentialResponse) => {
+    const userInfo = jwtDecode(
+      response.credential as string
+    ) as GoogleJWTResponse;
+    const googleLoginRequest = new GoogleLoginRequest();
+    googleLoginRequest.avatarPath = userInfo.picture;
+    googleLoginRequest.deviceId = "test";
+    googleLoginRequest.email = userInfo.email;
+    googleLoginRequest.fullName = userInfo.name + " " + userInfo.family_name;
+    googleLoginRequest.googleId = userInfo.sub;
+    googleLoginRequest.platform = "web";
+
+    console.log(googleLoginRequest);
+
+    axios
+      .post<GeneralResponse<LoginResponse>>(
+        `${BASE_URL}/public/authorization/login/google`,
+        googleLoginRequest
+      )
+      .then((res) => {
+        localStorage.setItem("AuthorizationToken", res.data.result.data.token);
+      })
+      .catch((err) => console.error("Error:", err));
+    console.log("Google Login Success:", userInfo);
+  };
+
+  const handleFailure = () => {
+    console.error("Google Login Failed:");
+  };
+
   return (
     <div className="login bg-[url('@/assets/images/blue-and-pink-flowers-perfume-bottle.jpg')] bg-center bg-cover bg-fixed py-10 relative min-h-screen">
       <div className="overlay bg-pink-100 opacity-60 absolute w-full h-full top-0 left-0"></div>
@@ -43,11 +86,22 @@ const LoginPage = () => {
                 Forgot password?
               </a>
             </div>
-            <Button btnText="LOG IN" className="p-2"/>
+            <Button btnText="LOG IN" className="py-2 px-3" />
             <div className="text-white my-2">OR</div>
             <div>
-              <Button btnText="Continue with Google" icon={faGoogle} className="p-2"/>
-              <Button btnText="Continue with Apple" icon={faApple} className="p-2"/>
+              <GoogleOAuthProvider clientId="247472219554-ca908o6moi06h85d2f7ln5bdcbqlte79.apps.googleusercontent.com">
+                <div>
+                  <GoogleLogin
+                    onSuccess={handleSuccess}
+                    onError={handleFailure}
+                  />
+                </div>
+              </GoogleOAuthProvider>
+              <Button
+                btnText="Continue with Apple"
+                icon={faApple}
+                className="py-2 px-3"
+              />
             </div>
             <p className="text-gray-500">
               Need an account?

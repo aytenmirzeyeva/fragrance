@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/app/store";
-import { Link } from "react-router-dom";
-import ProductCard from "@/components/product/ProductCard";
-// import { Link } from "react-router-dom";
+import ProductCard from "@/components/ProductCard/ProductCard";
+
 const FavoritesPage: React.FC = () => {
   const likedPerfumes = useSelector(
     (state: RootState) => state.wishlist.likedPerfumes
@@ -16,11 +15,9 @@ const FavoritesPage: React.FC = () => {
       <h1 className="text-center text-2xl md:text-4xl font-medium text-gray-600">
         Favorite perfumes
       </h1>
-      {perfumes.map((id) => (
-        <div key={id}>
-          <ProductCard />
-        </div>
-      ))}
+      <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
+        <ProductCard data={likedPerfumes} />
+      </div>
     </div>
   );
 };

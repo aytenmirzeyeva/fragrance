@@ -3,7 +3,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import Introduction from "../components/Introduction";
 import Filters from "@/components/FiltersSection";
 import Button from "@/components/Button";
-import ProductCardsSection from "@/components/product/ProductCardsSection";
+import ProductCardsSection from "@/components/ProductCard/ProductCardsSection";
 const Home = () => {
   const [showFilters, setShowFilters] = useState(false);
   return (
