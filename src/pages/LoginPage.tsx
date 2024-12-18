@@ -7,7 +7,7 @@ import {
 } from "@react-oauth/google";
 import { BASE_URL } from "@/services/baseURL";
 
-import Input from "@/components/Input";
+import Input from "@/components/ProductCard/Input";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
@@ -38,7 +38,10 @@ const LoginPage = () => {
         googleLoginRequest
       )
       .then((res) => {
-        localStorage.setItem("AuthorizationToken", res.data.result.data.token);
+        localStorage.setItem(
+          "Authorization",
+          "bearer " + res.data.result.data.token
+        );
       })
       .catch((err) => console.error("Error:", err));
     console.log("Google Login Success:", userInfo);

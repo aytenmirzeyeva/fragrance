@@ -6,7 +6,7 @@ import { GeneralResponse } from "@/types/general-response";
 import { Brand } from "../types/Brand";
 import Heading from "./Heading/index";
 import FilterCard from "./FilterCard";
-import Input from "./Input/index";
+import Input from "./ProductCard/Input/index";
 const BrandsFilter = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
 

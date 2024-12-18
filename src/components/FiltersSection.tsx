@@ -5,7 +5,6 @@ import GenderFilter from "./GenderFilter";
 import BrandsFilter from "./BrandsFilter";
 import NotesFilter from "./NotesFilter";
 import RatingFilter from "./RatingFilter";
-import Input from "./Input";
 import SelectInput from "./SelectInput";
 
 interface FiltersProps {

@@ -1,5 +1,5 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import Input from "./Input";
+import Input from "./ProductCard/Input";
 const Introduction = () => {
   return (
     <div className="introduction min-h-screen bg-[url('@/assets/images/pink-perfume.jpg')] bg-center bg-cover bg-fixed relative">

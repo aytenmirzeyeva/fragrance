@@ -3,19 +3,19 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/app/store";
-import { toggleLike } from "@/features/wishlist/wishList";
+import { useDispatch } from "react-redux";
+import { addToFavorites } from "@/features/product/productSlice";
 import StarIcon from "../StarIcon";
 import { ProductCardProps } from "./model";
+import { Perfume } from "@/types/product-response";
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
   const dispatch = useDispatch();
-  const likedPerfumes = useSelector(
-    (state: RootState) => state.wishlist.likedPerfumes
-  );
-  const handleToggleLike = (perfumeId: string) => {
-    dispatch(toggleLike(perfumeId));
+
+  const handleLike = (perfume: Perfume) => {
+    dispatch(addToFavorites(perfume.id));
+    perfume.inWishList = !perfume.inWishList;
+    // dispatch(removeFromWhishList(perfume))
   };
   return (
     <>
@@ -29,24 +29,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           <div
             className="heart-icon-wrapper absolute top-3 right-3 hover:scale-[102%] cursor-pointer transition-transform duration-300"
             onClick={() => {
-              handleToggleLike(item.id);
+              handleLike(item);
             }}
           >
             <FontAwesomeIcon
               icon={
-                (likedPerfumes[item.id]
-                  ? faHeartSolid
-                  : faHeartRegular) as IconProp
+                (item.inWishList ? faHeartSolid : faHeartRegular) as IconProp
               }
               className={`text-lg transition-all duration-300 ${
-                likedPerfumes[item.id]
+                item.inWishList
                   ? "text-pink-400"
                   : "text-pink-200 hover:text-pink-400"
               }`}
             />
           </div>
           <Link
-            to={`/perfumePage/${item.id}`}
+            to={`/detailsPage/${item.id}`}
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col justify-between h-full"

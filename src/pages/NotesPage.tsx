@@ -6,7 +6,7 @@ import { BASE_URL } from "@/services/baseURL";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import StyledHeading from "@/components/Heading";
 import FilterCard from "@/components/FilterCard/index";
-import Input from "@/components/Input";
+import Input from "@/components/ProductCard/Input";
 const Notes = () => {
   const [notes, setNotes] = useState<Note[]>([]);
 

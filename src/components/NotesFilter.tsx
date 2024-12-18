@@ -6,7 +6,7 @@ import { Note } from "@/types/note-response";
 import { BASE_URL } from "@/services/baseURL";
 import FilterCard from "./FilterCard";
 import Heading from "./Heading/index";
-import Input from "./Input/index";
+import Input from "./ProductCard/Input/index";
 const NotesFilter = () => {
   const [notes, setNotes] = useState<Note[]>([]);
 

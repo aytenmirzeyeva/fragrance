@@ -1,3 +1,5 @@
+import { Perfume } from "@/types/product-response";
+
 export interface ProductCardProps {
-  data: Array<any>;
+  data: Perfume[];
 }
