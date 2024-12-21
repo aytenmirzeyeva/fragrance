@@ -12,6 +12,8 @@ import { Perfume } from "@/types/product-response";
 import StarIcon from "@/components/StarIcon";
 import SectionTitle from "@/components/SectionTitle";
 import NotesSection from "@/components/NotesSection";
+import ProductCardsSection from "@/components/ProductCard/ProductCardsSection";
+import ProductCard from "@/components/ProductCard/ProductCard";
 const DetailsPage = () => {
   const [perfume, setPerfume] = useState<Perfume>();
   const [loading, setLoading] = useState(true);
@@ -58,14 +60,14 @@ const DetailsPage = () => {
         <p>{perfume?.gender}</p>
         <div className="flex justify-center md:justify-evenly items-center flex-wrap md:flex-nowrap gap-10 my-10">
           {/* Card */}
-          <div className="relative rounded-lg shadow-lg p-8 w-full md:w-1/2">
+          <div className="relative p-8 w-full md:w-1/3">
             <img
               src={perfume?.imageUrl}
               alt={`${perfume?.brandName}+${perfume?.title}`}
-              className="w-[200px] md:w-[250px]"
+              className="w-[200px] ml-auto"
             />
             <div
-              className="absolute top-8 right-8 hover:scale-[102%] cursor-pointer transition-transform duration-300"
+              className="absolute top-1/2 left-10 hover:scale-[102%] cursor-pointer transition-transform duration-300"
               onClick={(e) => {
                 e.preventDefault();
                 toggleLike();
@@ -73,7 +75,7 @@ const DetailsPage = () => {
             >
               <FontAwesomeIcon
                 icon={(isLiked ? faHeartSolid : faHeartRegular) as IconProp}
-                className={`text-4xl transition-all duration-300 ${
+                className={`text-5xl transition-all duration-300 ${
                   isLiked
                     ? "text-pink-400"
                     : "text-pink-200 hover:text-pink-400"
@@ -150,6 +152,12 @@ const DetailsPage = () => {
           ) : (
             ""
           )}
+          <div>
+            <SectionTitle title="Similar perfumes" />
+            <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
+              {/* <ProductCard data={perfume.} /> */}
+            </div>
+          </div>
         </div>
       </div>
     </div>

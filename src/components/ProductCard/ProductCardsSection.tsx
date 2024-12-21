@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import { BASE_URL } from "@/services/baseURL";
 import { GeneralResponse } from "@/types/general-response";
 import { SearchRequest } from "@/types/search-request";
@@ -18,27 +18,36 @@ const ProductCardsSection: React.FC = () => {
     const fetchPerfumes = async () => {
       setLoading(true);
       setError(null);
+
       let searchRequest = new SearchRequest();
       searchRequest.endYear = 2012;
       searchRequest.startYear = 2010;
       searchRequest.title = "dol";
+
       try {
         const response = await axios.post<GeneralResponse<Perfume[]>>(
           `${BASE_URL}/public/search/?page=0&size=100`,
           searchRequest
         );
         setPerfumes(response.data.result.data);
-        setLoading(false);
+        // setLoading(false);
       } catch (err) {
         setError("Failed to fetch data");
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchPerfumes();
-    console.log(perfumes);
+    // console.log(perfumes);
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center w-full">
+        <CircularProgress sx={{ color: "#f472b6" }} />
+      </div>
+    );
   }
 
   if (error) {

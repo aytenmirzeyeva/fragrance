@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faCircleUser, faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -12,14 +13,14 @@ const Header = () => {
   };
   const navItems = ["Catalog", "Notes", "Brands"];
   return (
-    <header className="bg-pink-200 shadow-sm">
+    <header className="bg-pink-200 shadow-sm text-pink-900">
       <div className="container">
         {/* Top bar */}
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             to="/"
-            className="font-bold text-pink-900 text-xl hover:text-pink-400 transition-colors"
+            className="font-bold text-xl hover:text-pink-300 transition-colors"
           >
             Fragrance
           </Link>
@@ -28,14 +29,17 @@ const Header = () => {
           <div className="flex items-center md:hidden gap-4">
             <Link
               to="/favoritesPage"
-              className="p-2 text-fuchsia-900 hover:text-fuchsia-400 flex justify-center items-center"
+              className="p-2 hover:text-pink-300 flex justify-center items-center"
             >
-              <FontAwesomeIcon icon={faHeart as IconProp} className="text-xl" />
+              <FontAwesomeIcon
+                icon={faHeartSolid as IconProp}
+                className="text-xl"
+              />
             </Link>
 
             {/* Hamburger Menu Button */}
             <button
-              className="p-2 text-fuchsia-900 hover:text-fuchsia-400 text-xl"
+              className="p-2 hover:text-pink-300 text-xl"
               onClick={toggleNav}
             >
               <FontAwesomeIcon icon={faBars} />
@@ -50,7 +54,7 @@ const Header = () => {
                 <li key={item}>
                   <Link
                     to={item === "Catalog" ? "/" : `/${item.toLowerCase()}`}
-                    className="px-4 py-2 text-fuchsia-900 hover:text-fuchsia-400 rounded-md transition-colors"
+                    className="px-4 py-2 hover:text-pink-300 rounded-md transition-colors"
                   >
                     {item}
                   </Link>
@@ -63,10 +67,10 @@ const Header = () => {
               <li>
                 <Link
                   to="/favoritesPage"
-                  className="px-4 py-2 text-fuchsia-900 hover:text-fuchsia-400 transition-colors"
+                  className="px-4 py-2 hover:text-pink-300 transition-colors"
                 >
                   <FontAwesomeIcon
-                    icon={faHeart as IconProp}
+                    icon={faHeartSolid as IconProp}
                     className="text-xl"
                   />
                 </Link>
@@ -74,7 +78,7 @@ const Header = () => {
               <li>
                 <Link
                   to="/loginPage"
-                  className="px-4 py-2 flex items-center text-fuchsia-900 hover:text-fuchsia-400 transition-colors"
+                  className="px-4 py-2 flex items-center hover:text-pink-300 transition-colors"
                 >
                   <FontAwesomeIcon
                     icon={faCircleUser as IconProp}
@@ -99,7 +103,7 @@ const Header = () => {
                 <li key={item}>
                   <Link
                     to={item === "Catalog" ? "/" : `/${item.toLowerCase()}`}
-                    className="w-full py-3 block text-fuchsia-900 hover:text-fuchsia-400 transition-colors"
+                    className="w-full py-3 block hover:text-pink-300 transition-colors"
                     onClick={toggleNav}
                   >
                     {item}
@@ -109,7 +113,7 @@ const Header = () => {
               <li>
                 <Link
                   to="/loginPage"
-                  className="w-full py-3 flex items-center text-fuchsia-900 hover:text-fuchsia-400 hover:bg-pink-100 transition-colors"
+                  className="w-full py-3 flex items-center hover:text-pink-300 transition-colors"
                   onClick={toggleNav}
                 >
                   <FontAwesomeIcon

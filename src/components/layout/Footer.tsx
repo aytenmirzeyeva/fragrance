@@ -8,7 +8,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-pink-200 text-gray-600 py-10">
+    <footer className="bg-pink-200 text-pink-900 py-10">
       <div className="container text-center">
         <p>&copy; {new Date().getFullYear()} Fragrance. All rights reserved.</p>
         <p>Follow us on:</p>
