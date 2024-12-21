@@ -12,14 +12,14 @@ const Header = () => {
   };
   const navItems = ["Catalog", "Notes", "Brands"];
   return (
-    <header className="bg-pink-100 shadow-sm">
+    <header className="bg-pink-200 shadow-sm">
       <div className="container">
         {/* Top bar */}
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             to="/"
-            className="font-bold text-fuchsia-900 text-xl hover:text-fuchsia-400 transition-colors"
+            className="font-bold text-pink-900 text-xl hover:text-pink-400 transition-colors"
           >
             Fragrance
           </Link>

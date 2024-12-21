@@ -1,4 +1,4 @@
-import Input from "@/components/ProductCard/Input";
+import Input from "@/components/Input";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle, faApple } from "@fortawesome/free-brands-svg-icons";

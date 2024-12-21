@@ -6,7 +6,7 @@ import { BASE_URL } from "@/services/baseURL";
 import { GeneralResponse } from "@/types/general-response";
 import { SearchRequest } from "@/types/search-request";
 import { Perfume } from "@/types/product-response";
-import Input from "@/components/ProductCard/Input";
+import Input from "@/components/Input";
 import ProductCard from "./ProductCard";
 
 const ProductCardsSection: React.FC = () => {

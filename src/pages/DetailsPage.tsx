@@ -122,6 +122,9 @@ const DetailsPage = () => {
           <div className="flex items-baseline">
             <SectionTitle title="Rating" />
             <div className="flex items-center">
+              <span>
+                {perfume?.rating === 0 ? 0 : perfume?.rating.toFixed(1)}
+              </span>
               <StarIcon />
             </div>
           </div>

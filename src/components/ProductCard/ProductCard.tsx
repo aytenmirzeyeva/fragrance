@@ -3,18 +3,23 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites } from "@/features/product/productSlice";
 import StarIcon from "../StarIcon";
 import { ProductCardProps } from "./model";
 import { Perfume } from "@/types/product-response";
+import { useState } from "react";
+import { RootState } from "@/app/store";
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
+  // const [inWishlist, setInWishlist] = useState(false);
   const dispatch = useDispatch();
+  const favorites = useSelector((state: RootState) => state.product.favorites);
 
-  const handleLike = (perfume: Perfume) => {
-    dispatch(addToFavorites(perfume.id));
-    perfume.inWishList = !perfume.inWishList;
+  const handleLike = (perfume: any) => {
+    dispatch(addToFavorites(perfume));
+    // setInWishlist(true)
+    // perfume.inWishList = !perfume.inWishList;
     // dispatch(removeFromWhishList(perfume))
   };
   return (
@@ -23,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         <div
           key={item.id}
           className="flex flex-col shadow-lg hover:shadow-xl p-2 
-          rounded-lg w-[150px]  hover:scale-[102%] transition-all duration-200 bg-pink-50 relative pt-10"
+          rounded-lg w-[150px] hover:scale-[102%] transition-all duration-200 bg-pink-50 relative pt-10"
         >
           {/* Like Button */}
           <div
@@ -34,10 +39,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
           >
             <FontAwesomeIcon
               icon={
-                (item.inWishList ? faHeartSolid : faHeartRegular) as IconProp
+                (favorites.includes(item.id)
+                  ? faHeartSolid
+                  : faHeartRegular) as IconProp
               }
               className={`text-lg transition-all duration-300 ${
-                item.inWishList
+                favorites.includes(item.id)
                   ? "text-pink-400"
                   : "text-pink-200 hover:text-pink-400"
               }`}

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import ProductCard from "@/components/ProductCard/ProductCard";
 import { BASE_URL } from "@/services/baseURL";
 import { GeneralResponse } from "@/types/general-response";
 import { WishlistResponse } from "@/types/wishlist-response";

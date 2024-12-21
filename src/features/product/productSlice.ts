@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "@/services/baseURL";
 import { GeneralResponse } from "@/types/general-response";
+import { Perfume } from "@/types/product-response";
 
 export interface ProductState {
   favorites: string[];
@@ -15,13 +16,20 @@ export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    addToFavorites: (state, action: PayloadAction<string>) => {
-      const productId = action.payload;
+    addToFavorites: (state, action: PayloadAction<Perfume>) => {
+      const perfume = action.payload;
       const authToken = localStorage.getItem("Authorization");
 
+      const inWishList = state.favorites.includes(perfume.id);
+
+      if (inWishList) {
+        state.favorites = state.favorites.filter((id) => id !== perfume.id);
+      } else {
+        state.favorites.push(perfume.id);
+      }
       axios
         .post<GeneralResponse<any>>(
-          `${BASE_URL}/private/wish-list/add/${productId}`,
+          `${BASE_URL}/private/wish-list/add/${perfume.id}`,
           {},
           {
             headers: {
@@ -29,7 +37,13 @@ export const productSlice = createSlice({
             },
           }
         )
-        .then((res) => console.log(res.data));
+        .then((res) => {
+          console.log("Wishlist status updated:", res.data);
+        })
+        .catch((err) => {
+          console.error("Wishlist update failed:", err);
+          perfume.inWishList = !perfume.inWishList;
+        });
     },
   },
 });
