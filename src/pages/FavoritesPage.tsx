@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "@/services/baseURL";
-import { GeneralResponse } from "@/types/general-response";
-import { WishlistResponse } from "@/types/wishlist-response";
-import { Perfume } from "@/types/product-response";
+import { GeneralResponse } from "@/types/response/general-response";
+import { WishlistResponse } from "@/types/response/wishlist";
+import { Perfume } from "@/types/response/product";
 import ProductCard from "@/components/ProductCard/ProductCard";
 
 const FavoritesPage: React.FC = () => {
@@ -50,7 +50,9 @@ const FavoritesPage: React.FC = () => {
         Favorite perfumes
       </h1>
       <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
-        <ProductCard data={perfumes} />
+        {perfumes.map((item) => (
+          <ProductCard product={item} key={item.id} />
+        ))}
       </div>
     </div>
   );

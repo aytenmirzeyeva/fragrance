@@ -13,7 +13,7 @@ const Home = () => {
       <Button
         btnText="Filters"
         icon={faFilter}
-        className="fixed bottom-4 right-4 shadow-lg z-50 md:hidden bg-pink-50 border border-pink-300 px-2 py-1"
+        className="fixed bottom-4 right-4 shadow-lg z-50 md:hidden bg-pink-50  border-pink-300 px-2 py-1"
         onClick={() => setShowFilters(!showFilters)}
       />
 

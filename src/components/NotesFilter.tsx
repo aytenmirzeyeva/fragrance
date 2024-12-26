@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { GeneralResponse } from "@/types/general-response";
-import { Note } from "@/types/note-response";
+import { GeneralResponse } from "@/types/response/general-response";
+import { Note } from "@/types/response/note";
 import { BASE_URL } from "@/services/baseURL";
 import FilterCard from "./FilterCard";
 import Heading from "./Heading/index";

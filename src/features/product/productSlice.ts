@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { BASE_URL } from "@/services/baseURL";
-import { GeneralResponse } from "@/types/general-response";
-import { Perfume } from "@/types/product-response";
+import { GeneralResponse } from "@/types/response/general-response";
+import { Perfume } from "@/types/response/product";
 
 export interface ProductState {
   favorites: string[];
@@ -51,10 +51,3 @@ export const productSlice = createSlice({
 export const { addToFavorites } = productSlice.actions;
 
 export default productSlice.reducer;
-
-// export const wishListSlice= createSlice({
-//   name: "wishList",
-//   initialState: {
-//     da
-//   }
-// })

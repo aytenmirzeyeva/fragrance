@@ -1,45 +1,37 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import CircularProgress from "@mui/material/CircularProgress";
-import { BASE_URL } from "@/services/baseURL";
-import { GeneralResponse } from "@/types/general-response";
-import { SearchRequest } from "@/types/search-request";
-import { Perfume } from "@/types/product-response";
+import { SearchRequest } from "@/types/request/search";
+import { Perfume } from "@/types/response/product";
 import Input from "@/components/Input";
 import ProductCard from "./ProductCard";
-
+import { fetchPerfumes } from "../../utils/product.api";
 const ProductCardsSection: React.FC = () => {
   const [perfumes, setPerfumes] = useState<Perfume[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPerfumes = async () => {
+    const loadPerfumes = async () => {
       setLoading(true);
       setError(null);
 
-      let searchRequest = new SearchRequest();
+      const searchRequest = new SearchRequest();
       searchRequest.endYear = 2012;
       searchRequest.startYear = 2010;
       searchRequest.title = "dol";
 
       try {
-        const response = await axios.post<GeneralResponse<Perfume[]>>(
-          `${BASE_URL}/public/search/?page=0&size=100`,
-          searchRequest
-        );
-        setPerfumes(response.data.result.data);
-        // setLoading(false);
-      } catch (err) {
+        const perfumes = await fetchPerfumes(searchRequest);
+        setPerfumes(perfumes);
+      } catch (err: any) {
         setError("Failed to fetch data");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPerfumes();
-    // console.log(perfumes);
+    loadPerfumes();
   }, []);
 
   if (loading) {
@@ -49,7 +41,6 @@ const ProductCardsSection: React.FC = () => {
       </div>
     );
   }
-
   if (error) {
     return <p>Error: {error}</p>;
   }
@@ -63,7 +54,9 @@ const ProductCardsSection: React.FC = () => {
           placeholder="Search perfumes, brands, notes..."
         />
         <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
-          <ProductCard data={perfumes} />
+          {perfumes.map((item) => (
+            <ProductCard product={item} key={item.id} />
+          ))}
         </div>
       </div>
     </div>

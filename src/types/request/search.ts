@@ -1,4 +1,4 @@
-import { Brand } from "./Brand";
+import { Brand } from "../response/brand";
 
 export class SearchRequest {
   brands?: Brand[];

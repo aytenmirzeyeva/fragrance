@@ -17,12 +17,12 @@ const Filters: React.FC<FiltersProps> = ({ className, setShowFilters }) => {
       <div className="flex flex-wrap justify-between items-center">
         <Button
           btnText="Clear all filters"
-          className="border-pink-300 bg-transparent text-pink-300 px-2 py-1"
+          className="border border-pink-200 bg-transparent text-gray-400 px-2 py-1"
         />
         <Button
           icon={faXmark}
           onClick={() => setShowFilters(false)}
-          className="md:hidden border-pink-300 bg-transparent text-pink-300 px-2 py-1"
+          className="md:hidden border border-pink-200 bg-transparent text-gray-400 px-2 py-1"
         />
       </div>
       <hr className="my-6" />

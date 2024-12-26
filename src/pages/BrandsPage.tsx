@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { GeneralResponse } from "@/types/general-response";
-import { Brand } from "@/types/Brand";
+import { GeneralResponse } from "@/types/response/general-response";
+import { Brand } from "@/types/response/brand";
 import { BASE_URL } from "@/services/baseURL";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import StyledHeading from "@/components/Heading";

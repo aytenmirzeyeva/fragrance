@@ -1,4 +1,4 @@
-import { Perfume } from "./product-response";
+import { Perfume } from "./product";
 export interface WishlistResponse {
   products: Perfume[];
 }

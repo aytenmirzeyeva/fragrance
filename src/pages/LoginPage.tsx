@@ -13,10 +13,10 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import StyledHeading from "@/components/Heading";
 import Button from "@/components/Button";
-import { GoogleLoginRequest } from "@/types/google-login.request";
-import { GoogleJWTResponse } from "@/types/google.jwt.response";
-import { GeneralResponse } from "@/types/general-response";
-import { LoginResponse } from "@/types/login-response";
+import { GoogleLoginRequest } from "@/types/request/google-login";
+import { GoogleJWTResponse } from "@/types/response/google.jwt";
+import { GeneralResponse } from "@/types/response/general-response";
+import { LoginResponse } from "@/types/response/login";
 const LoginPage = () => {
   const handleSuccess = (response: GoogleCredentialResponse) => {
     const userInfo = jwtDecode(

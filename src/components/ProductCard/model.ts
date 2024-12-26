@@ -1,5 +1,5 @@
-import { Perfume } from "@/types/product-response";
+import { Perfume } from "@/types/response/product";
 
 export interface ProductCardProps {
-  data: Perfume[];
+  product: Perfume;
 }
