@@ -24,15 +24,19 @@ const Notes = () => {
     fetchPerfumes();
   }, []);
   return (
-    <div className="py-4">
-      <div className="container">
-        <StyledHeading headingText="Notes" className="text-3xl text-center" />
+    <div className="relative py-20 bg-[url('@/assets/images/blue-and-pink-flowers-perfume-bottle.jpg')] bg-center bg-cover bg-fixed">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-pink-100 opacity-70"></div>
+
+      {/* Content */}
+      <div className="container relative z-10">
+        <StyledHeading headingText="Notes" />
         <div className="flex flex-col">
           <Input
             icon={faSearch}
             type="text"
             placeholder="Search notes..."
-            width="w-3/4"
+            width="w-1/2"
           />
 
           <div className="flex flex-wrap justify-center gap-3 py-7">

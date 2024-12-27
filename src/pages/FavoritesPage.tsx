@@ -5,6 +5,7 @@ import { GeneralResponse } from "@/types/response/general-response";
 import { WishlistResponse } from "@/types/response/wishlist";
 import { Perfume } from "@/types/response/product";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import StyledHeading from "@/components/Heading";
 
 const FavoritesPage: React.FC = () => {
   const [perfumes, setPerfumes] = useState<Perfume[]>([]);
@@ -45,16 +46,22 @@ const FavoritesPage: React.FC = () => {
     );
   }
   return (
-    <div className="container my-10">
-      <h1 className="text-center text-2xl md:text-4xl font-medium text-gray-600">
-        Favorite perfumes
-      </h1>
-      <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
-        {perfumes.map((item) => (
-          <ProductCard product={item} key={item.id} />
-        ))}
+    <>
+      <div className="relative py-20 bg-[url('@/assets/images/blue-and-pink-flowers-perfume-bottle.jpg')] bg-center bg-cover bg-fixed">
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-pink-100 opacity-70"></div>
+
+        {/* Content */}
+        <div className="container relative z-10">
+          <StyledHeading headingText="Favorite perfumes" />
+          <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
+            {perfumes.map((item) => (
+              <ProductCard product={item} key={item.id} />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

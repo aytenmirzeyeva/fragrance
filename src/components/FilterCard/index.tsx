@@ -9,10 +9,10 @@ const FilterCard: React.FC<FilterCardProps> = ({ image, text, className }) => {
   };
   return (
     <div
-      className={`w-32 md:w-48 p-2 flex justify-center items-center gap-1 m-1 rounded-lg border transition-all duration-300 hover:shadow-md hover:scale-[102%] cursor-pointer ${className}
+      className={`w-32 md:w-48 p-2 flex justify-center items-center gap-1 m-1 rounded-lg border transition-all duration-300 hover:shadow-md hover:scale-[102%] cursor-pointer bg-pink-50 ${className}
       ${
         selected
-          ? "border-pink-400 shadow-lg shadow-pink-100/50 bg-pink-100"
+          ? "border-pink-400 shadow-md shadow-pink-100/50 bg-pink-100"
           : "border-gray-100"
       }
     `}

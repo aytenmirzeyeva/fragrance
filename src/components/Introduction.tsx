@@ -2,9 +2,12 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Input from "./Input";
 const Introduction = () => {
   return (
-    <div className="introduction min-h-screen bg-[url('@/assets/images/pink-perfume.jpg')] bg-center bg-cover bg-fixed relative">
-      <div className="overlay bg-pink-100 opacity-60 absolute w-full h-full top-0 left-0"></div>
-      <div className="intro-content w-full absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] z-30 ">
+    <div className="relative min-h-screen bg-[url('@/assets/images/pink-perfume.jpg')] bg-center bg-cover bg-fixed">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-pink-100 opacity-70 "></div>
+
+      {/* Content */}
+      <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="container">
           <h1 className="text-5xl md:text-7xl font-bold text-pink-950">
             Discover Your Signature Scent

@@ -27,10 +27,10 @@ const RatingFilter = () => {
           <div
             key={rating.id}
             className={`
-               p-4 flex justify-center items-center rounded-xl bg-white border-2 transition-all duration-200 hover:shadow-md hover:scale-[102%] cursor-pointer
+               p-3 flex justify-center items-center rounded-lg bg-pink-50 border transition-all duration-300 hover:shadow-md hover:scale-[102%] cursor-pointer
               ${
                 selected === rating.id
-                  ? "border-pink-400 shadow-lg shadow-pink-100/50 bg-pink-50"
+                  ? "border-pink-400 shadow-md shadow-pink-100/50 bg-pink-100"
                   : "border-gray-100"
               }
             `}

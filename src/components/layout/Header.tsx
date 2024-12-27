@@ -1,6 +1,6 @@
 // import React from 'react'
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons";
@@ -8,14 +8,31 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
   };
+
   const navItems = ["Catalog", "Notes", "Brands"];
+
   return (
-    <header className="bg-pink-200 shadow-sm text-pink-900">
+    <header
+      className={`bg-pink-50 text-pink-900 md:fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out ${
+        isScrolled ? "md:shadow-md" : "md:bg-transparent"
+      }`}
+    >
       <div className="container">
-        {/* Top bar */}
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
@@ -98,7 +115,7 @@ const Header = () => {
           } md:hidden transition-all duration-500 ease-in-out overflow-hidden`}
         >
           <nav>
-            <ul className="flex flex-col">
+            <ul className="flex flex-col py-2">
               {navItems.map((item) => (
                 <li key={item}>
                   <Link
