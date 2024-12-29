@@ -1,6 +1,7 @@
 import React from "react";
 import { NotesSectionProps } from "./model";
 import FilterCard from "../FilterCard";
+
 const NotesSection: React.FC<NotesSectionProps> = ({ title, items }) => (
   <div className="notes">
     <p className="text-pink-300 text-lg">{title}:</p>

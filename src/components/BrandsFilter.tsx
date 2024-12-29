@@ -7,6 +7,7 @@ import { Brand } from "../types/response/brand";
 import Heading from "./Heading/index";
 import FilterCard from "./FilterCard";
 import Input from "./Input/index";
+
 const BrandsFilter = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
 
