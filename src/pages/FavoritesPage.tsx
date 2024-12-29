@@ -4,7 +4,7 @@ import { BASE_URL } from "@/services/baseURL";
 import { GeneralResponse } from "@/types/response/general-response";
 import { WishlistResponse } from "@/types/response/wishlist";
 import { Perfume } from "@/types/response/product";
-import ProductCard from "@/components/ProductCard/ProductCard";
+import ProductCard from "@/components/ProductCard/index";
 import StyledHeading from "@/components/Heading";
 
 const FavoritesPage: React.FC = () => {
@@ -53,7 +53,7 @@ const FavoritesPage: React.FC = () => {
 
         {/* Content */}
         <div className="container relative z-10">
-          <StyledHeading headingText="Favorite perfumes" />
+          <StyledHeading headingText="Favorite perfumes" className="text-2xl md:text-4xl"/>
           <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
             {perfumes.map((item) => (
               <ProductCard product={item} key={item.id} />

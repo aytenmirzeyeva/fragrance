@@ -30,7 +30,7 @@ const Notes = () => {
 
       {/* Content */}
       <div className="container relative z-10">
-        <StyledHeading headingText="Notes" />
+        <StyledHeading headingText="Notes" className="text-2xl md:text-4xl"/>
         <div className="flex flex-col">
           <Input
             icon={faSearch}

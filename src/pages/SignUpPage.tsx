@@ -16,7 +16,7 @@ const SignUpPage = () => {
           action=""
           className="flex flex-col justify-center items-center w-4/5 md:w-3/5 mx-auto"
         >
-          <StyledHeading headingText="Sign Up" />
+          <StyledHeading headingText="Sign Up" className="text-2xl md:text-4xl"/>
           <Input
             type="email"
             placeholder="Enter your email address"

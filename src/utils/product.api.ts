@@ -5,7 +5,10 @@ import { SearchRequest } from "@/types/request/search";
 import { Perfume } from "@/types/response/product";
 
 export const fetchPerfumes = async (
-  searchRequest: SearchRequest
+  searchRequest: SearchRequest,
+  page: number,
+  size: number
+
 ): Promise<Perfume[]> => {
   try {
     const authToken = localStorage.getItem("Authorization");
@@ -13,7 +16,7 @@ export const fetchPerfumes = async (
       console.error("Authorization token not found!");
     }
     const response = await axios.post<GeneralResponse<Perfume[]>>(
-      `${BASE_URL}/public/search/?page=0&size=100`,
+      `${BASE_URL}/public/search/?page=${page}&size=${size}`,
       searchRequest,
       {
         headers: {
