@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
@@ -35,28 +35,32 @@ const Header = () => {
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link
+          <NavLink
             to="/"
-            className="font-bold text-xl hover:text-pink-300 transition-colors"
+            className="font-bold text-xl hover:text-pink-400 transition-colors"
           >
             Fragrance
-          </Link>
+          </NavLink>
 
           {/* Right side icons for mobile */}
           <div className="flex items-center md:hidden gap-4">
-            <Link
+            <NavLink
               to="/favoritesPage"
-              className="p-2 hover:text-pink-300 flex justify-center items-center"
+              className={({ isActive }) =>
+                `px-4 py-2 transition-colors ${
+                  isActive ? "text-pink-400" : "hover:text-pink-400"
+                }`
+              }
             >
               <FontAwesomeIcon
                 icon={faHeartSolid as IconProp}
                 className="text-xl"
               />
-            </Link>
+            </NavLink>
 
             {/* Hamburger Menu Button */}
             <button
-              className="p-2 hover:text-pink-300 text-xl"
+              className="p-2 hover:text-pink-400 text-xl"
               onClick={toggleNav}
             >
               <FontAwesomeIcon icon={faBars} />
@@ -69,12 +73,16 @@ const Header = () => {
             <ul className="flex items-center">
               {navItems.map((item) => (
                 <li key={item}>
-                  <Link
+                  <NavLink
                     to={item === "Catalog" ? "/" : `/${item.toLowerCase()}`}
-                    className="px-4 py-2 hover:text-pink-300 rounded-md transition-colors"
+                    className={({ isActive }) =>
+                      `px-4 py-2 rounded-md transition-colors ${
+                        isActive ? "text-pink-400" : "hover:text-pink-400"
+                      }`
+                    }
                   >
                     {item}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -82,27 +90,35 @@ const Header = () => {
             {/* Nav right side - desktop */}
             <ul className="flex items-center">
               <li>
-                <Link
+                <NavLink
                   to="/favoritesPage"
-                  className="px-4 py-2 hover:text-pink-300 transition-colors"
+                  className={({ isActive }) =>
+                    `px-4 py-2 transition-colors ${
+                      isActive ? "text-pink-400" : "hover:text-pink-400"
+                    }`
+                  }
                 >
                   <FontAwesomeIcon
                     icon={faHeartSolid as IconProp}
                     className="text-xl"
                   />
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/loginPage"
-                  className="px-4 py-2 flex items-center hover:text-pink-300 transition-colors"
+                  className={({ isActive }) =>
+                    `px-4 py-2 flex items-center transition-colors ${
+                      isActive ? "text-pink-400" : "hover:text-pink-400"
+                    }`
+                  }
                 >
                   <FontAwesomeIcon
                     icon={faCircleUser as IconProp}
                     className="text-xl mr-2"
                   />
                   <span>Login</span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
@@ -118,19 +134,27 @@ const Header = () => {
             <ul className="flex flex-col py-2">
               {navItems.map((item) => (
                 <li key={item}>
-                  <Link
+                  <NavLink
                     to={item === "Catalog" ? "/" : `/${item.toLowerCase()}`}
-                    className="w-full py-3 block hover:text-pink-300 transition-colors"
+                    className={({ isActive }) =>
+                      `w-full py-3 block transition-colors ${
+                        isActive ? "text-pink-400" : "hover:text-pink-400"
+                      }`
+                    }
                     onClick={toggleNav}
                   >
                     {item}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
               <li>
-                <Link
+                <NavLink
                   to="/loginPage"
-                  className="w-full py-3 flex items-center hover:text-pink-300 transition-colors"
+                  className={({ isActive }) =>
+                    `w-full py-3 flex items-center transition-colors ${
+                      isActive ? "text-pink-400" : "hover:text-pink-400"
+                    }`
+                  }
                   onClick={toggleNav}
                 >
                   <FontAwesomeIcon
@@ -138,7 +162,7 @@ const Header = () => {
                     className="text-xl mr-2"
                   />
                   <span>Login</span>
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </nav>
