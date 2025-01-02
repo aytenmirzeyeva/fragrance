@@ -8,7 +8,6 @@ export const fetchPerfumes = async (
   searchRequest: SearchRequest,
   page: number,
   size: number
-
 ): Promise<Perfume[]> => {
   try {
     const authToken = localStorage.getItem("Authorization");

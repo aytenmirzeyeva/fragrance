@@ -7,22 +7,60 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import StyledHeading from "@/components/Heading";
 import FilterCard from "@/components/FilterCard/index";
 import Input from "@/components/Input";
-const Brands = () => {
+import { CircularProgress } from "@mui/material";
+
+const BrandsPage = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(0);
+
+  const loadBrands = async () => {
+    if (!hasMore) return;
+
+    setError(null);
+    setLoading(true);
+
+    try {
+      const response = await axios.get<GeneralResponse<Brand[]>>(
+        `${BASE_URL}/public/search/brands?page=${page}&query=&size=50`
+      );
+      const newBrands = response.data.result.data;
+
+      setBrands((prev) => [...prev, ...newBrands]);
+      if (response.data.result.data.length < 20) {
+        setHasMore(false);
+      }
+    } catch (err: any) {
+      setError("Failed to fetch data");
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    loadBrands();
+  }, [page]);
 
   useEffect(() => {
-    const fetchPerfumes = async () => {
-      try {
-        const response = await axios.get<GeneralResponse<Brand[]>>(
-          `${BASE_URL}/public/search/brands?page=0&query=a&size=10`
-        );
-        setBrands(response.data.result.data);
-      } catch (err) {
-        console.log("Failed to fetch data");
+    const handleScroll = () => {
+      const bottom =
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 1;
+
+      if (bottom && hasMore && !loading) {
+        setPage((prevPage) => prevPage + 1);
       }
     };
-    fetchPerfumes();
-  }, []);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [loading, hasMore]);
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
   return (
     <div className="relative py-20 bg-[url('@/assets/images/blue-and-pink-flowers-perfume-bottle.jpg')] bg-center bg-cover bg-fixed">
       {/* Overlay */}
@@ -30,7 +68,7 @@ const Brands = () => {
 
       {/* Content*/}
       <div className="container relative z-10">
-        <StyledHeading headingText="Brands" className="text-2xl md:text-4xl"/>
+        <StyledHeading headingText="Brands" className="text-2xl md:text-4xl" />
         <div className="flex flex-col">
           <Input
             icon={faSearch}
@@ -47,6 +85,16 @@ const Brands = () => {
                 className="w-64"
               />
             ))}
+            {loading && (
+              <div className="flex justify-center items-center w-full">
+                <CircularProgress sx={{ color: "#f472b6" }} />
+              </div>
+            )}
+            {!hasMore && brands.length >= 100 && (
+              <p className="text-center text-gray-500">
+                You have reached the end!
+              </p>
+            )}
           </div>
         </div>
       </div>
@@ -54,4 +102,4 @@ const Brands = () => {
   );
 };
 
-export default Brands;
+export default BrandsPage;
