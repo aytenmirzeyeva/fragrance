@@ -70,11 +70,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               {product.title.replace(product.brandName, "").trim()}
             </h2>
             <p className="text-gray-600 text-xs">{product.brandName}</p>
-            <span className="flex justify-center items-center text-gray-400 text-xs">
-              Rating:
-              <StarIcon />
-              {product.rating === 0 ? 0 : product.rating.toFixed(1)}
-            </span>
+            {product.rating !== null ? (
+              <span className="flex justify-center items-center text-gray-400 text-xs">
+                Rating:
+                <StarIcon />
+                {product.rating === 0 ? 0 : product.rating?.toFixed(1)}
+              </span>
+            ) : null}
           </div>
         </Link>
       </div>

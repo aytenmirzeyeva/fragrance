@@ -12,6 +12,7 @@ import { Perfume } from "@/types/response/product";
 import StarIcon from "@/components/StarIcon";
 import SectionTitle from "@/components/SectionTitle";
 import NotesSection from "@/components/NotesSection";
+import ProductCard from "@/components/ProductCard";
 
 const DetailsPage = () => {
   const [perfume, setPerfume] = useState<Perfume>();
@@ -180,8 +181,10 @@ const DetailsPage = () => {
             )}
             <div>
               <SectionTitle title="Similar perfumes" />
-              <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
-                {/* <ProductCard data={perfume.} /> */}
+              <div className="flex flex-row flex-wrap gap-5 justify-center py-5">
+                {similarPerfumes?.map((perfume) => (
+                  <ProductCard key={perfume.id} product={perfume} />
+                ))}
               </div>
             </div>
           </div>
