@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FilterCardProps } from "./model";
+import { fallbackImage } from "@/utils/contants";
 
 const FilterCard: React.FC<FilterCardProps> = ({ image, text, className }) => {
   const [selected, setSelected] = useState(false);
@@ -19,7 +20,14 @@ const FilterCard: React.FC<FilterCardProps> = ({ image, text, className }) => {
       onClick={selectCard}
     >
       <div className="w-10 h-10 md:w-8 md:h-8 rounded-full overflow-hidden">
-        <img src={image} className="w-full h-full object-contain" />
+        <img
+          onError={(target) => {
+            target.currentTarget.onerror = null;
+            target.currentTarget.src = fallbackImage;
+          }}
+          src={image}
+          className="w-full h-full object-contain"
+        />
       </div>
       <p
         className={`text-xs text-center flex justify-center items-center flex-wrap ${
@@ -28,9 +36,6 @@ const FilterCard: React.FC<FilterCardProps> = ({ image, text, className }) => {
       `}
       >
         {text}
-        {/* <span className="bg-pink-100 rounded-2xl py-1 px-2 m-1 text-xs text-pink-400">
-          {count}
-        </span> */}
       </p>
     </div>
   );

@@ -15,27 +15,46 @@ import NotesSection from "@/components/NotesSection";
 
 const DetailsPage = () => {
   const [perfume, setPerfume] = useState<Perfume>();
+  const [similarPerfumes, setSimilarPerfumes] = useState<Perfume[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isLiked, setLiked] = useState(false);
   const { perfumeId } = useParams();
 
   useEffect(() => {
-    const fetchPerfumes = async () => {
+    const fetchPerfume = async () => {
       try {
         const response = await axios.get<GeneralResponse<Perfume>>(
           `${BASE_URL}/public/product/${perfumeId}`
         );
         setPerfume(response.data.result.data);
-        setLoading(false);
       } catch (err) {
         setError("Failed to fetch data");
       } finally {
         setLoading(false);
       }
     };
-    fetchPerfumes();
-  }, []);
+    fetchPerfume();
+  }, [perfume]);
+
+  useEffect(() => {
+    const fetchSimilarPerfumes = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get<GeneralResponse<Perfume[]>>(
+          `${BASE_URL}/public/product/similar/${perfumeId}`
+        );
+        setSimilarPerfumes(response.data.result.data);
+      } catch (err) {
+        setError("Failed to fetch data");
+      } finally {
+        setLoading(false);
+      }
+      console.log(similarPerfumes);
+    };
+    fetchSimilarPerfumes();
+  }, [perfumeId]);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -94,7 +113,10 @@ const DetailsPage = () => {
                 {perfume?.mainAccords.map((accord, index) => {
                   const colorClass = colors[index % colors.length];
                   return (
-                    <div className="flex mb-1 gap-2 items-center flex-wrap md:flex-nowrap">
+                    <div
+                      className="flex mb-1 gap-2 items-center flex-wrap md:flex-nowrap"
+                      key={accord.id}
+                    >
                       <div className="w-32">{accord.name}</div>
 
                       {/* Accord Bar */}

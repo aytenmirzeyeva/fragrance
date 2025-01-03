@@ -55,7 +55,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           <div className="card-top w-full h-[150px] mb-1">
             <img
               src={product.imageUrl}
-              alt={product.brandName + " " + product.title}
+              alt={
+                product
+                  ? product.brandName + " " + product.title
+                  : "perfume-image"
+              }
               className="w-full h-full object-contain"
             />
           </div>

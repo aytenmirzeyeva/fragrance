@@ -8,6 +8,7 @@ import StyledHeading from "@/components/Heading";
 import FilterCard from "@/components/FilterCard/index";
 import Input from "@/components/Input";
 import { CircularProgress } from "@mui/material";
+import { fallbackImage } from "@/utils/contants";
 
 const BrandsPage = () => {
   const [brands, setBrands] = useState<Brand[]>([]);
@@ -38,6 +39,7 @@ const BrandsPage = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     loadBrands();
   }, [page]);
@@ -69,31 +71,28 @@ const BrandsPage = () => {
       {/* Content*/}
       <div className="container relative z-10">
         <StyledHeading headingText="Brands" className="text-2xl md:text-4xl" />
-        <div className="flex flex-col">
+        <div className="flex flex-col items-center">
           <Input
             icon={faSearch}
             type="text"
             placeholder="Search brands..."
             width="w-1/2"
           />
-          <div className="flex flex-wrap justify-center gap-3 py-7">
-            {brands.map((brand) => (
-              <FilterCard
-                key={brand.id}
-                text={brand.title}
-                image={brand.image}
-                className="w-64"
-              />
-            ))}
+          <div className="flex flex-wrap gap-3 py-7 mx-auto justify-center">
+            {brands.map((brand) =>
+              brand.image && brand.title ? (
+                <FilterCard
+                  key={brand.id}
+                  text={brand.title}
+                  image={brand.image ? brand.image : fallbackImage}
+                  className="w-64"
+                />
+              ) : null
+            )}
             {loading && (
               <div className="flex justify-center items-center w-full">
                 <CircularProgress sx={{ color: "#f472b6" }} />
               </div>
-            )}
-            {!hasMore && brands.length >= 100 && (
-              <p className="text-center text-gray-500">
-                You have reached the end!
-              </p>
             )}
           </div>
         </div>

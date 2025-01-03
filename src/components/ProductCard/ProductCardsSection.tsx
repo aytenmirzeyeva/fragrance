@@ -61,7 +61,7 @@ const ProductCardsSection: React.FC = () => {
   if (error) {
     return <p>Error: {error}</p>;
   }
-
+  console.log(perfumes);
   return (
     <div className="py-4">
       <div className="flex flex-col">
