@@ -72,7 +72,7 @@ const DetailsPage = () => {
   return (
     <div className="relative py-20 bg-[url('@/assets/images/pink-roses-pink-colored-water.jpg')] bg-center bg-cover bg-fixed">
       {/* Overlay */}
-      <div className="absolute inset-0 bg-pink-100 opacity-80"></div>
+      <div className="absolute inset-0 bg-pink-50 opacity-90"></div>
 
       {/* Content */}
       <div className="container  relative z-10">
@@ -181,7 +181,7 @@ const DetailsPage = () => {
             )}
             <div>
               <SectionTitle title="Similar perfumes" />
-              <div className="flex flex-wrap gap-5 p-3 ">
+              <div className="flex flex-wrap gap-5 p-3 justify-center">
                 {similarPerfumes?.map((perfume) => (
                   <ProductCard key={perfume.id} product={perfume} />
                 ))}
