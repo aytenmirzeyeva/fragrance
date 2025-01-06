@@ -151,7 +151,7 @@ const DetailsPage = () => {
             <div className="flex items-baseline">
               <SectionTitle title="Rating" />
               <div className="flex items-center">
-                <span>
+                <span className="italic text-lg">
                   {perfume?.rating === 0 ? 0 : perfume?.rating.toFixed(1)}
                 </span>
                 <StarIcon />
@@ -165,7 +165,7 @@ const DetailsPage = () => {
             </div>
             <div>
               <SectionTitle title="Reviews" />
-              <Link to="" className="italic hover:underline">
+              <Link to="" className="italic hover:underline  text-lg">
                 {perfume?.reviewCount}
               </Link>
             </div>
@@ -181,7 +181,7 @@ const DetailsPage = () => {
             )}
             <div>
               <SectionTitle title="Similar perfumes" />
-              <div className="flex flex-row flex-wrap gap-5 justify-center py-5">
+              <div className="flex flex-wrap gap-5 p-3 ">
                 {similarPerfumes?.map((perfume) => (
                   <ProductCard key={perfume.id} product={perfume} />
                 ))}
