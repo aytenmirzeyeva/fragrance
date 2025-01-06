@@ -13,6 +13,7 @@ import StarIcon from "@/components/StarIcon";
 import SectionTitle from "@/components/SectionTitle";
 import NotesSection from "@/components/NotesSection";
 import ProductCard from "@/components/ProductCard";
+import { genderLabel } from "@/utils/genderLabel";
 
 const DetailsPage = () => {
   const [perfume, setPerfume] = useState<Perfume>();
@@ -20,7 +21,22 @@ const DetailsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isLiked, setLiked] = useState(false);
+  const [comments, setComments] = useState<string[]>([]);
   const { perfumeId } = useParams();
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get<GeneralResponse<string[]>>(
+          `${BASE_URL}/public/comment/${perfumeId}`
+        );
+        setComments(response.data.result.data);
+      } catch (err) {
+        setError("Failed to fetch data");
+      }
+    };
+    fetchComments();
+  }, [perfume]);
 
   useEffect(() => {
     const fetchPerfume = async () => {
@@ -81,7 +97,7 @@ const DetailsPage = () => {
             {perfume?.title.replace(perfume.brandName, "").trim()}
           </h2>
           <h1 className="text-xl text-pink-300">{perfume?.brandName}</h1>
-          <p>{perfume?.gender}</p>
+          <p>{genderLabel(perfume?.gender)}</p>
           <div className="flex justify-center md:justify-evenly items-center flex-wrap md:flex-nowrap gap-10 my-10">
             {/* Card */}
             <div className="relative p-8 w-full md:w-1/3">
@@ -141,6 +157,7 @@ const DetailsPage = () => {
             </div>
           </div>
           <div>
+            {/* Description */}
             <div>
               <SectionTitle title="Perfume description" />
               <p
@@ -148,6 +165,8 @@ const DetailsPage = () => {
                 dangerouslySetInnerHTML={{ __html: perfume?.description || "" }}
               ></p>
             </div>
+
+            {/* Rating */}
             <div className="flex items-baseline">
               <SectionTitle title="Rating" />
               <div className="flex items-center">
@@ -157,12 +176,16 @@ const DetailsPage = () => {
                 <StarIcon />
               </div>
             </div>
+
+            {/* Comments */}
             <div>
               <SectionTitle title="Comments" />
               <Link to="" className="hover:underline italic text-lg">
                 {perfume?.commentCount}
               </Link>
             </div>
+
+            {/* Reviews */}
             <div>
               <SectionTitle title="Reviews" />
               <Link to="" className="italic hover:underline  text-lg">
@@ -170,6 +193,7 @@ const DetailsPage = () => {
               </Link>
             </div>
 
+            {/* Perfume Notes */}
             {perfume?.topNotes && perfume?.topNotes.length > 0 ? (
               <NotesSection title="Top Notes" items={perfume?.topNotes} />
             ) : perfume?.baseNotes && perfume?.baseNotes.length > 0 ? (
@@ -179,6 +203,31 @@ const DetailsPage = () => {
             ) : (
               ""
             )}
+
+            {/* Comments Section*/}
+            {perfume?.commentCount ? (
+              <div id="comments" className="flex flex-col p-5">
+                <SectionTitle title="Comments" />
+                <div className="flex flex-col gap-5">
+                  {comments.map((comment) => (
+                    <div className="flex justify-center items-center gap-5 border p-5 rounded-lg shadow-xs">
+                      <img
+                        src=""
+                        alt="user-image"
+                        className="border-2 rounded-full w-10 h-10 object-cover center"
+                      />
+                      <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Quod, rerum.
+                        {comment}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+
+            {/* Similar Perfumes */}
             <div>
               <SectionTitle title="Similar perfumes" />
               <div className="flex flex-wrap gap-5 p-3 justify-center">

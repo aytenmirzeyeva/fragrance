@@ -9,7 +9,7 @@ const Introduction = () => {
       {/* Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="container">
-          <h1 className="text-5xl md:text-7xl font-bold text-pink-950">
+          <h1 className="text-4xl md:text-6xl font-bold text-pink-950">
             Discover Your Signature Scent
           </h1>
           <h3 className="text-2xl md:text-4xl my-6 text-pink-950">

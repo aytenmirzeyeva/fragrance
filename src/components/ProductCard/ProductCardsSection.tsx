@@ -43,6 +43,8 @@ const ProductCardsSection: React.FC = () => {
     loadPerfumes();
   }, [page]);
 
+  console.log(perfumes);
+  
   const handleScroll = () => {
     const bottom =
       window.innerHeight + document.documentElement.scrollTop >=
