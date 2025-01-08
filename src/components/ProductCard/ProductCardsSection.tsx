@@ -78,26 +78,24 @@ const ProductCardsSection: React.FC = () => {
   console.log(perfumes);
 
   return (
-    <div className="py-4">
-      <div className="flex flex-col">
-        <Input
-          icon={faSearch}
-          type="text"
-          placeholder="Search perfumes, brands, notes..."
-          onChange={(e) => setSearchTitle(e.target.value)}
-          value={searchTitle}
-        />
-        <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
-          {perfumes.map((item) => (
-            <ProductCard product={item} key={item.id} />
-          ))}
-        </div>
-        {loading && (
-          <div className="flex justify-center items-center w-full">
-            <CircularProgress sx={{ color: "#f472b6" }} />
-          </div>
-        )}
+    <div className="py-4 flex flex-col" id="productsSection">
+      <Input
+        icon={faSearch}
+        type="text"
+        placeholder="Search perfumes, brands, notes..."
+        onChange={(e) => setSearchTitle(e.target.value)}
+        value={searchTitle}
+      />
+      <div className="flex flex-row flex-wrap gap-5 justify-center py-10">
+        {perfumes.map((item) => (
+          <ProductCard product={item} key={item.id} />
+        ))}
       </div>
+      {loading && (
+        <div className="flex justify-center items-center w-full">
+          <CircularProgress sx={{ color: "#f472b6" }} />
+        </div>
+      )}
     </div>
   );
 };
