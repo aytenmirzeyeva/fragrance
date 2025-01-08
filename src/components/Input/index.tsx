@@ -5,10 +5,12 @@ const Input: React.FC<InputProps> = ({
   type,
   placeholder,
   defaultValue,
+  value,
   minimumValue,
   icon,
   width,
-  className
+  className,
+  onChange,
 }) => {
   return (
     <div className="w-full flex items-center">
@@ -18,7 +20,9 @@ const Input: React.FC<InputProps> = ({
           className={`w-full py-3 px-6 pl-10 text-md rounded-lg border my-5 placeholder:text-gray-400 border-pink-200 shadow-inner-lg focus:border-pink-300 focus:outline-none focus:shadow-lg transition-all duration-500 ${className}`}
           placeholder={placeholder}
           defaultValue={defaultValue}
+          value={value}
           min={minimumValue}
+          onChange={onChange}
         />
         {icon && (
           <FontAwesomeIcon
