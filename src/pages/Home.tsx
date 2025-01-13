@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import Introduction from "../components/Introduction";
-import Filters from "@/components/FiltersSection";
+import Filters from "@/components/FiltersSection/index";
 import Button from "@/components/Button";
 import ProductCardsSection from "@/components/ProductCard/ProductCardsSection";
+
 const Home = () => {
   const [showFilters, setShowFilters] = useState(false);
   return (
