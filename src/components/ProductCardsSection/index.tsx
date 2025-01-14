@@ -4,10 +4,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { SearchRequest } from "@/types/request/search";
 import { Perfume } from "@/types/response/product";
 import Input from "@/components/Input";
-import ProductCard from "./index";
+import ProductCard from "../ProductCard/index";
 import { fetchPerfumes } from "../../utils/product.api";
+import { ProductCardsSectionProps } from "./model";
 
-const ProductCardsSection: React.FC = () => {
+const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
+  startYear,
+  endYear,
+}) => {
   const [perfumes, setPerfumes] = useState<Perfume[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +30,8 @@ const ProductCardsSection: React.FC = () => {
     const searchRequest = new SearchRequest();
 
     searchRequest.title = initialLoad ? "" : debouncedTitle;
+    searchRequest.startYear = startYear;
+    searchRequest.endYear = endYear;
 
     try {
       const newPerfumes = await fetchPerfumes(searchRequest, page, 20);
