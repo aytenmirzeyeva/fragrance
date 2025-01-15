@@ -59,7 +59,7 @@ const Home = () => {
               onClick={() => setShowFilters(false)}
             >
               <div
-                className="bg-white rounded-lg shadow-lg w-[90%] max-w-lg p-4 h-screen overflow-y-auto"
+                className="bg-white rounded-lg shadow-lg w-[80%] p-4 h-screen overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
                 <Filters

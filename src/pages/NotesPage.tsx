@@ -24,7 +24,7 @@ const Notes: React.FC = () => {
 
     try {
       const response = await axios.get<GeneralResponse<Note[]>>(
-        `${BASE_URL}/public/search/notes?page=${page}&query=&size=50`
+        `${BASE_URL}/public/search/notes?page=${page}&query=&size=50`,
       );
       const newNotes = response.data.result.data;
 
@@ -46,7 +46,7 @@ const Notes: React.FC = () => {
     const handleScroll = () => {
       const bottom =
         window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 1;
+        document.documentElement.offsetHeight - 100;
 
       if (bottom && hasMore && !loading) {
         setPage((prevPage) => prevPage + 1);

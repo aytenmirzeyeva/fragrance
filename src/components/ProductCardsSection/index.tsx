@@ -28,24 +28,22 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
     setError(null);
 
     const searchRequest = new SearchRequest();
-
     searchRequest.title = initialLoad ? "" : debouncedTitle;
     searchRequest.startYear = startYear;
     searchRequest.endYear = endYear;
+    // searchRequest.genderId = genderId;
 
     try {
       const newPerfumes = await fetchPerfumes(searchRequest, page, 20);
 
       setPerfumes((prev) =>
-        page === 0 ? newPerfumes : [...prev, ...newPerfumes]
+        page === 0 ? newPerfumes : [...prev, ...newPerfumes],
       );
 
       setHasMore(newPerfumes.length > 0);
-      setLoading(false);
       setInitialLoad(false);
     } catch (err: any) {
       setError(err.message);
-      setLoading(false);
     } finally {
       setLoading(false);
     }
@@ -59,13 +57,16 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
   }, [searchTitle]);
 
   useEffect(() => {
+    setPage(0);
+    setPerfumes([]);
+    setHasMore(true);
     loadPerfumes();
-  }, [debouncedTitle, page]);
+  }, [debouncedTitle, startYear, endYear, hasMore]);
 
   const handleScroll = () => {
     const bottom =
       window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 1;
+      document.documentElement.offsetHeight - 100;
 
     if (bottom && hasMore && !loading) {
       setPage((prevPage) => prevPage + 1);
@@ -80,8 +81,6 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
   if (error) {
     return <p>Error: {error}</p>;
   }
-
-  console.log(perfumes);
 
   return (
     <div className="py-4 flex flex-col" id="productsSection">
@@ -100,6 +99,14 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
       {loading && (
         <div className="flex justify-center items-center w-full">
           <CircularProgress sx={{ color: "#f472b6" }} />
+        </div>
+      )}
+      {!loading && perfumes.length === 0 && (
+        <p className="text-gray-500 text-center">No perfumes found.</p>
+      )}
+      {error && (
+        <div className="text-red-500 text-center">
+          <p>Failed to load perfumes. Please try again later.</p>
         </div>
       )}
     </div>

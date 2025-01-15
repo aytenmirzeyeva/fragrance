@@ -25,7 +25,7 @@ const BrandsPage = () => {
 
     try {
       const response = await axios.get<GeneralResponse<Brand[]>>(
-        `${BASE_URL}/public/search/brands?page=${page}&query=&size=50`
+        `${BASE_URL}/public/search/brands?page=${page}&query=&size=50`,
       );
       const newBrands = response.data.result.data;
 
@@ -48,7 +48,7 @@ const BrandsPage = () => {
     const handleScroll = () => {
       const bottom =
         window.innerHeight + document.documentElement.scrollTop >=
-        document.documentElement.offsetHeight - 1;
+        document.documentElement.offsetHeight - 100;
 
       if (bottom && hasMore && !loading) {
         setPage((prevPage) => prevPage + 1);
@@ -77,6 +77,8 @@ const BrandsPage = () => {
             type="text"
             placeholder="Search brands..."
             width="w-1/2"
+            // value={}
+            // onChange={(e) => {}}
           />
           <div className="flex flex-wrap gap-3 py-7 mx-auto justify-center">
             {brands.map((brand) =>
@@ -87,7 +89,7 @@ const BrandsPage = () => {
                   image={brand.image ? brand.image : fallbackImage}
                   className="w-64"
                 />
-              ) : null
+              ) : null,
             )}
             {loading && (
               <div className="flex justify-center items-center w-full">
