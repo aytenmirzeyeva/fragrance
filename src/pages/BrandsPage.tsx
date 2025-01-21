@@ -68,7 +68,7 @@ const BrandsPage = () => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-pink-100 opacity-70"></div>
 
-      {/* Content*/}
+      {/* Content */}
       <div className="container relative z-10">
         <StyledHeading headingText="Brands" className="text-2xl md:text-4xl" />
         <div className="flex flex-col items-center">

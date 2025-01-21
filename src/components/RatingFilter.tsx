@@ -17,7 +17,15 @@ const RatingFilter = () => {
       id: 3,
       stars: 3,
     },
+    {
+      id: 4,
+      stars: 2,
+    },
   ];
+
+  const handleSelect = (id: number) => {
+    setSelected((prevSelected) => (prevSelected === id ? null : id));
+  };
 
   return (
     <div className="py-4">
@@ -34,7 +42,7 @@ const RatingFilter = () => {
                   : "border-gray-100"
               }
             `}
-            onClick={() => setSelected(rating.id)}
+            onClick={() => handleSelect(rating.id)}
           >
             <div className="stars-container flex gap-1">
               {[...Array(rating.stars)].map((_, index) => (

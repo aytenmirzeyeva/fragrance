@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/index";
 import StyledHeading from "../Heading/index";
-import GenderFilter from "../GenderFilter";
+import GenderFilter from "../GenderFilter/index.tsx";
 import BrandsFilter from "../BrandsFilter";
 import NotesFilter from "../NotesFilter";
 import RatingFilter from "../RatingFilter";
@@ -15,6 +15,8 @@ const Filters: React.FC<FiltersProps> = ({
   endYear,
   setStartYear,
   setEndYear,
+  genderId,
+  setGenderId,
 }) => {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -44,6 +46,7 @@ const Filters: React.FC<FiltersProps> = ({
     setStartYear(undefined);
     setEndYear(undefined);
   };
+
   return (
     <div className={`p-4 ${className}`}>
       <div className="flex flex-wrap justify-between items-center">
@@ -109,7 +112,7 @@ const Filters: React.FC<FiltersProps> = ({
         </div>
       </div>
       <hr className="my-6" />
-      <GenderFilter />
+      <GenderFilter genderId={genderId} setGenderId={setGenderId} />
       <BrandsFilter />
       <NotesFilter />
       <RatingFilter />

@@ -31,7 +31,12 @@ const NotesFilter = () => {
         <div className="flex flex-wrap justify-center h-72 overflow-y-auto">
           {notes.map((note) =>
             note.image && note.title ? (
-              <FilterCard key={note.id} text={note.title} image={note.image} />
+              <FilterCard
+                key={note.id}
+                text={note.title}
+                image={note.image}
+                id={note.id}
+              />
             ) : null,
           )}
         </div>

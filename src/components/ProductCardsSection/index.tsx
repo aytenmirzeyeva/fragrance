@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import CircularProgress from "@mui/material/CircularProgress";
 import { SearchRequest } from "@/types/request/search";
@@ -11,6 +11,7 @@ import { ProductCardsSectionProps } from "./model";
 const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
   startYear,
   endYear,
+  genderId,
 }) => {
   const [perfumes, setPerfumes] = useState<Perfume[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,7 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
     searchRequest.title = initialLoad ? "" : debouncedTitle;
     searchRequest.startYear = startYear;
     searchRequest.endYear = endYear;
-    // searchRequest.genderId = genderId;
+    searchRequest.genderId = genderId;
 
     try {
       const newPerfumes = await fetchPerfumes(searchRequest, page, 20);
@@ -61,19 +62,23 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
     setPerfumes([]);
     setHasMore(true);
     loadPerfumes();
-  }, [debouncedTitle, startYear, endYear, hasMore]);
+  }, [debouncedTitle, startYear, endYear, genderId, page]);
 
-  const handleScroll = () => {
-    const bottom =
-      window.innerHeight + document.documentElement.scrollTop >=
-      document.documentElement.offsetHeight - 100;
-
-    if (bottom && hasMore && !loading) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
+  // useEffect(() => {
+  //   loadPerfumes();
+  // }, [page]);
 
   useEffect(() => {
+    const handleScroll = () => {
+      const bottom =
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 1;
+
+      if (bottom && hasMore && !loading) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading, hasMore]);
@@ -97,7 +102,7 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
         ))}
       </div>
       {loading && (
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full h-screen">
           <CircularProgress sx={{ color: "#f472b6" }} />
         </div>
       )}

@@ -10,6 +10,7 @@ const Home = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [startYear, setStartYear] = useState<number | undefined>();
   const [endYear, setEndYear] = useState<number | undefined>();
+  const [genderId, setGenderId] = useState<number>();
 
   const scrollToDown = () => {
     const productsSection = document.getElementById("productsSection");
@@ -68,6 +69,7 @@ const Home = () => {
                   endYear={endYear}
                   setStartYear={setStartYear}
                   setEndYear={setEndYear}
+                  genderId={genderId}
                 />
               </div>
             </div>
@@ -79,11 +81,18 @@ const Home = () => {
               endYear={endYear}
               setStartYear={setStartYear}
               setEndYear={setEndYear}
+              genderId={genderId}
+              setGenderId={setGenderId}
             />
           </div>
 
           {/* Product Cards Section */}
-          <ProductCardsSection startYear={startYear} endYear={endYear} />
+
+          <ProductCardsSection
+            startYear={startYear}
+            endYear={endYear}
+            genderId={genderId}
+          />
         </div>
       </div>
     </div>

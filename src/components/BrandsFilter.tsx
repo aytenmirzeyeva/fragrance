@@ -38,6 +38,7 @@ const BrandsFilter = () => {
                 key={brand.id}
                 text={brand.title}
                 image={brand.image}
+                id={brand.id}
               />
             ) : null,
           )}
