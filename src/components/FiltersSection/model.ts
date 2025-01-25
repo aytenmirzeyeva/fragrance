@@ -6,5 +6,6 @@ export interface FiltersProps {
   className?: string;
   setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
   genderId?: number | null;
-  setGenderId?: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setGenderId: React.Dispatch<React.SetStateAction<number | null | undefined>>;
+  resetSearch: () => void;
 }

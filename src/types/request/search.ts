@@ -4,7 +4,7 @@ export class SearchRequest {
   brands?: Brand[];
   startYear?: number;
   endYear?: number;
-  genderId?: number;
+  genderId?: number | null | undefined;
   noteIds?: number[];
   rating?: number;
   title?: string;

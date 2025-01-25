@@ -5,19 +5,20 @@ import { SearchRequest } from "@/types/request/search";
 import { Perfume } from "@/types/response/product";
 import Input from "@/components/Input";
 import ProductCard from "../ProductCard/index";
-import { fetchPerfumes } from "../../utils/product.api";
+import { fetchPerfumes } from "@/utils/product.api.ts";
 import { ProductCardsSectionProps } from "./model";
 
 const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
   startYear,
   endYear,
   genderId,
+  searchTitle,
+  setSearchTitle,
 }) => {
   const [perfumes, setPerfumes] = useState<Perfume[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
-  const [searchTitle, setSearchTitle] = useState("");
   const [debouncedTitle, setDebouncedTitle] = useState(searchTitle);
   const [page, setPage] = useState(0);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -62,19 +63,19 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
     setPerfumes([]);
     setHasMore(true);
     loadPerfumes();
-  }, [debouncedTitle, startYear, endYear, genderId, page]);
+  }, [debouncedTitle, startYear, endYear, genderId]);
 
-  // useEffect(() => {
-  //   loadPerfumes();
-  // }, [page]);
+  useEffect(() => {
+    loadPerfumes();
+  }, [page]);
 
   useEffect(() => {
     const handleScroll = () => {
-      const bottom =
+      const isBottom =
         window.innerHeight + document.documentElement.scrollTop >=
         document.documentElement.offsetHeight - 1;
 
-      if (bottom && hasMore && !loading) {
+      if (isBottom && hasMore && !loading) {
         setPage((prevPage) => prevPage + 1);
       }
     };
@@ -102,7 +103,7 @@ const ProductCardsSection: React.FC<ProductCardsSectionProps> = ({
         ))}
       </div>
       {loading && (
-        <div className="flex justify-center items-center w-full h-screen">
+        <div className="flex justify-center items-center w-full py-4">
           <CircularProgress sx={{ color: "#f472b6" }} />
         </div>
       )}

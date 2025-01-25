@@ -17,6 +17,7 @@ const Filters: React.FC<FiltersProps> = ({
   setEndYear,
   genderId,
   setGenderId,
+  resetSearch,
 }) => {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -45,6 +46,8 @@ const Filters: React.FC<FiltersProps> = ({
   const resetFilters = () => {
     setStartYear(undefined);
     setEndYear(undefined);
+    setGenderId(null);
+    resetSearch();
   };
 
   return (

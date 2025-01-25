@@ -10,11 +10,15 @@ const Home = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [startYear, setStartYear] = useState<number | undefined>();
   const [endYear, setEndYear] = useState<number | undefined>();
-  const [genderId, setGenderId] = useState<number>();
+  const [genderId, setGenderId] = useState<number | null | undefined>();
+  const [searchTitle, setSearchTitle] = useState("");
 
   const scrollToDown = () => {
     const productsSection = document.getElementById("productsSection");
     productsSection?.scrollIntoView({ behavior: "smooth" });
+  };
+  const resetSearch = () => {
+    setSearchTitle("");
   };
   return (
     <div>
@@ -70,6 +74,8 @@ const Home = () => {
                   setStartYear={setStartYear}
                   setEndYear={setEndYear}
                   genderId={genderId}
+                  setGenderId={setGenderId}
+                  resetSearch={resetSearch}
                 />
               </div>
             </div>
@@ -83,6 +89,7 @@ const Home = () => {
               setEndYear={setEndYear}
               genderId={genderId}
               setGenderId={setGenderId}
+              resetSearch={resetSearch}
             />
           </div>
 
@@ -92,6 +99,8 @@ const Home = () => {
             startYear={startYear}
             endYear={endYear}
             genderId={genderId}
+            searchTitle={searchTitle}
+            setSearchTitle={setSearchTitle}
           />
         </div>
       </div>

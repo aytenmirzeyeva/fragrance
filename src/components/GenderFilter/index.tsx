@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Heading from "../Heading/index.tsx";
 import { GenderFilterProps } from "@/components/GenderFilter/model.ts";
 import { gendersData } from "./genders.ts";
@@ -8,6 +8,10 @@ const GenderFilter: React.FC<GenderFilterProps> = ({
   setGenderId,
 }) => {
   const [selected, setSelected] = useState<number | null>(genderId);
+
+  useEffect(() => {
+    setSelected(genderId); // Sync local state when genderId changes
+  }, [genderId]);
 
   const handleSelect = (id: number) => {
     const newSelected = selected === id ? null : id;
