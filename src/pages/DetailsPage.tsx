@@ -28,21 +28,21 @@ const DetailsPage = () => {
     const fetchComments = async () => {
       try {
         const response = await axios.get<GeneralResponse<string[]>>(
-          `${BASE_URL}/public/comment/${perfumeId}`
+          `${BASE_URL}/public/comment/${perfumeId}`,
         );
         setComments(response.data.result.data);
       } catch (err) {
         setError("Failed to fetch data");
       }
     };
-    fetchComments();
-  }, [perfume]);
+    fetchComments().catch((err) => console.log(err));
+  }, [perfumeId]);
 
   useEffect(() => {
     const fetchPerfume = async () => {
       try {
         const response = await axios.get<GeneralResponse<Perfume>>(
-          `${BASE_URL}/public/product/${perfumeId}`
+          `${BASE_URL}/public/product/${perfumeId}`,
         );
         setPerfume(response.data.result.data);
       } catch (err) {
@@ -51,15 +51,15 @@ const DetailsPage = () => {
         setLoading(false);
       }
     };
-    fetchPerfume();
-  }, [perfume]);
+    fetchPerfume().catch((err) => console.log(err));
+  }, [perfumeId]);
 
   useEffect(() => {
     const fetchSimilarPerfumes = async () => {
       setLoading(true);
       try {
         const response = await axios.get<GeneralResponse<Perfume[]>>(
-          `${BASE_URL}/public/product/similar/${perfumeId}`
+          `${BASE_URL}/public/product/similar/${perfumeId}`,
         );
         setSimilarPerfumes(response.data.result.data);
       } catch (err) {
@@ -69,7 +69,7 @@ const DetailsPage = () => {
       }
       console.log(similarPerfumes);
     };
-    fetchSimilarPerfumes();
+    fetchSimilarPerfumes().catch((res) => console.log(res));
   }, [perfumeId]);
 
   if (loading) return <p>Loading...</p>;
@@ -94,16 +94,20 @@ const DetailsPage = () => {
       <div className="container  relative z-10">
         <div className="flex flex-col border rounded-lg shadow-lg my-10 p-8">
           <h2 className="text-3xl text-pink-400">
-            {perfume?.title.replace(perfume.brandName, "").trim()}
+            {perfume
+              ? perfume.title.replace(perfume.brandName, "").trim()
+              : "Perfume name"}
           </h2>
-          <h1 className="text-xl text-pink-300">{perfume?.brandName}</h1>
+          <h1 className="text-xl text-pink-300">
+            {perfume ? perfume.brandName : "Brand"}
+          </h1>
           <p>{genderLabel(perfume?.gender)}</p>
           <div className="flex justify-center md:justify-evenly items-center flex-wrap md:flex-nowrap gap-10 my-10">
             {/* Card */}
             <div className="relative p-8 w-full md:w-1/3">
               <img
                 src={perfume?.imageUrl}
-                alt={`${perfume?.brandName}+${perfume?.title}`}
+                alt={perfume ? `${perfume.brandName}+${perfume.title}` : ``}
                 className="w-[200px] ml-auto"
               />
               <div

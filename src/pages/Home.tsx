@@ -10,7 +10,7 @@ const Home = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [startYear, setStartYear] = useState<number | undefined>();
   const [endYear, setEndYear] = useState<number | undefined>();
-  const [genderId, setGenderId] = useState<number | null | undefined>();
+  const [genderId, setGenderId] = useState<number | null>();
   const [searchTitle, setSearchTitle] = useState("");
 
   const scrollToDown = () => {

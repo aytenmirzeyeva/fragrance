@@ -8,9 +8,9 @@ const FilterCard: React.FC<FilterCardProps> = ({
   className,
   id,
 }) => {
-  const [selected, setSelected] = useState<number | null>(null);
+  const [selected, setSelected] = useState<number | null>();
 
-  const handleSelect = (id: number) => {
+  const handleSelect = (id: number | undefined) => {
     setSelected((prevSelected) => (prevSelected === id ? null : id));
   };
 

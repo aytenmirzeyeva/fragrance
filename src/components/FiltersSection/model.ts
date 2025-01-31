@@ -5,7 +5,7 @@ export interface FiltersProps {
   setEndYear: React.Dispatch<React.SetStateAction<number | undefined>>;
   className?: string;
   setShowFilters: React.Dispatch<React.SetStateAction<boolean>>;
-  genderId?: number | null;
+  genderId: number | null | undefined;
   setGenderId: React.Dispatch<React.SetStateAction<number | null | undefined>>;
   resetSearch: () => void;
 }

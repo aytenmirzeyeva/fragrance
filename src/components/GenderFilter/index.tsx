@@ -7,13 +7,13 @@ const GenderFilter: React.FC<GenderFilterProps> = ({
   genderId,
   setGenderId,
 }) => {
-  const [selected, setSelected] = useState<number | null>(genderId);
+  const [selected, setSelected] = useState<number | null | undefined>(genderId);
 
   useEffect(() => {
-    setSelected(genderId); // Sync local state when genderId changes
+    setSelected(genderId);
   }, [genderId]);
 
-  const handleSelect = (id: number) => {
+  const handleSelect = (id: number | null) => {
     const newSelected = selected === id ? null : id;
     setSelected(newSelected);
     setGenderId(newSelected);
